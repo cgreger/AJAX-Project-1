@@ -13,20 +13,102 @@ function validate() {
 	var gender = getElementById("gender");
 	var courses = getElementById("courses");
 
+	if (!validateField(name)) {
 
+		isValid = false;
+
+	}
+
+	if (!validateField(email)) {
+
+		isValid = false;
+
+	}
+
+	if (!validateField(phoneAreaCode)) {
+
+		isValid = false;
+
+	}
+
+	if (!validateField(phonePrefix)) {
+
+		isValid = false;
+
+	}
+
+	if (validateField(phoneSuffix)) {
+
+		isValid = false;
+
+	}
+
+	if (validateField(address)) {
+
+		isValid = false;
+
+	}
+
+	if (validateField(city)) {
+
+		isValid = false;
+
+	}
+
+
+	if (validateField(state)) {
+
+		isValid = false;
+
+	}
+
+	if (validateField(zip)) {
+
+		isValid = false;
+
+	}
+
+	if (validateField(courses)) {
+
+		isValid = false;
+
+	}
+
+
+	// Output details if isValid flag still true
+	if (isValid) {
+
+		outputDetails();
+
+	}
 
 
 }
 
 function outputDetails() {
 
-
+	//<div></div>
 
 }
 
-function createErrorMessage(element) {
+// Is the field valid?
+function validateField(element) {
 
+	if (element.value.length > 0) {
 
+		return true; //yes
+
+	} else {
+
+		return false; //no
+
+	}
+
+}
+
+function createErrorMessage(element, error) {
+
+	//<span>there was an error</span>
 
 }
 
@@ -36,16 +118,3 @@ function removeErrorMessage(element) {
 
 }
 
-function isEmpty(element) {
-
-	if (element.value.length > 0) {
-
-		return false;
-
-	} else {
-
-		return true;
-
-	}
-
-}
