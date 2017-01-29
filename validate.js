@@ -1,6 +1,6 @@
 function validate() {
 
-	//TODO: all errors working except from address down
+	//TODO: City error appears in wrong spot. Check boxes error not working correctly.
 
 	var isValid = true;
 	var name = document.getElementById("name");
@@ -38,35 +38,35 @@ function validate() {
 
 	}
 
-	if (validateField(address)) {
+	if (!validateField(address)) {
 
 		isValid = false;
 		createErrorMessage(address, "Address required.", document.getElementById("addressDiv"));
 
 	}
 
-	if (validateField(city)) {
+	if (!validateField(city)) {
 
 		isValid = false;
 		createErrorMessage(city, "City required.", document.getElementById("cityDiv"));
 
 	}
 
-	if (validateField(state)) {
+	if (!validateField(state)) {
 
 		isValid = false;
 		createErrorMessage(state, "State required.", document.getElementById("stateDiv"));
 
 	}
 
-	if (validateField(zip)) {
+	if (!validateField(zip)) {
 
 		isValid = false;
 		createErrorMessage(zip, "Zip required.", document.getElementById("zipDiv"));
 
 	}
 
-	if (validateField(courses)) {
+	if (!validateField(courses)) {
 
 		isValid = false;
 		createErrorMessage(courses, "At least one course required.", document.getElementById("coursesDiv"));
