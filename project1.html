@@ -6,9 +6,50 @@
 	<
 </head>
 <body>
-	<form >
-		
+	<div id="form">
+		<label>Name:</label>
+		<input type="text" id="name"><br />
 
-	</form>
+		<label>Email:</label>
+		<input type="text" id="email"><br />
+
+		<label>Phone:</label>
+		<input type="text" id="phoneAreaCode">
+		<input type="text" id="phonePrefix">
+		<input type="text" id="phoneSuffix"><br />
+
+		<label>Address:</label>
+		<input type="text" id="address"><br />
+
+		<label>City:</label>
+		<input type="text" id="city"><br />
+
+		<label>State:</label>
+		<select id="state">
+			<option value="WI">Wisconsin</option>
+			<option value="TX">Texas</option>
+			<option value="WA">Washington</option>
+			<option value="AZ">Arizona</option>
+			<option value="FL">Florida</option>
+		</select><br />
+
+		<label>Zip:</label>
+		<input type="text" id="zip"><br />
+
+		<label>Gender:</label>
+		<input type="radio" id="gender" value="Male" checked="checked">
+		<input type="radio" id="gender" value="Female"><br />
+
+		<label>Previous Courses:</label>
+		<input type="checkbox" id="courses" value="ASP.NET"><label>ASP.NET</label>
+		<input type="checkbox" id="courses" value="Advanced Java"><label>Advanced Java</label>
+		<input type="checkbox" id="courses" value="PHP"><label>PHP</label><br />
+
+		<button onclick="validate();"></button>
+
+	</div>
+
+	<!-- Want ouput div here! <div id="output"></div> -->
+
 </body>
 </html>
