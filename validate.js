@@ -1,29 +1,31 @@
 function validate() {
 
+	//TODO: all errors working except from address down
+
 	var isValid = true;
-	var name = getElementById("name");
-	var email = getElementById("email");
-	var phoneAreaCode = getElementById("phoneAreaCode");
-	var phonePrefix = getElementById("phonePrefix");
-	var phoneSuffix = getElementById("phoneSuffix");
-	var address = getElementById("address");
-	var city = getElementById("city");
-	var state = getElementById("state");
-	var zip = getElementById("zip");
-	var gender = getElementById("gender");
-	var courses = getElementById("courses");
+	var name = document.getElementById("name");
+	var email = document.getElementById("email");
+	var phoneAreaCode = document.getElementById("phoneAreaCode");
+	var phonePrefix = document.getElementById("phonePrefix");
+	var phoneSuffix = document.getElementById("phoneSuffix");
+	var address = document.getElementById("address");
+	var city = document.getElementById("city");
+	var state = document.getElementById("state");
+	var zip = document.getElementById("zip");
+	var gender = document.getElementById("gender");
+	var courses = document.getElementById("courses");
 
 	if (!validateField(name)) {
 
 		isValid = false;
-		createErrorMessage(name, "Name required.");
+		createErrorMessage(name, "Name required.", document.getElementById("nameDiv"));
 
 	}
 
 	if (!validateField(email)) {
 
 		isValid = false;
-		createErrorMessage(,"Email required.");
+		createErrorMessage(email,"Email required.", document.getElementById("emailDiv"));
 
 	}
 
@@ -32,43 +34,42 @@ function validate() {
 		|| !validateField(phoneSuffix)) {
 
 		isValid = false;
-		createErrorMessage(phoneSuffix, "Full phone number required.");
+		createErrorMessage(phoneSuffix, "Full phone number required.", document.getElementById("phoneDiv"));
 
 	}
 
 	if (validateField(address)) {
 
 		isValid = false;
-		createErrorMessage(address, "Address required.");
+		createErrorMessage(address, "Address required.", document.getElementById("addressDiv"));
 
 	}
 
 	if (validateField(city)) {
 
 		isValid = false;
-		createErrorMessage(city, "City required.");
+		createErrorMessage(city, "City required.", document.getElementById("cityDiv"));
 
 	}
-
 
 	if (validateField(state)) {
 
 		isValid = false;
-		createErrorMessage(state, "State required.");
+		createErrorMessage(state, "State required.", document.getElementById("stateDiv"));
 
 	}
 
 	if (validateField(zip)) {
 
 		isValid = false;
-		createErrorMessage(zip, "Zip required.");
+		createErrorMessage(zip, "Zip required.", document.getElementById("zipDiv"));
 
 	}
 
 	if (validateField(courses)) {
 
 		isValid = false;
-		createErrorMessage(courses, "At least one course required.");
+		createErrorMessage(courses, "At least one course required.", document.getElementById("coursesDiv"));
 
 	}
 
@@ -79,7 +80,6 @@ function validate() {
 		outputDetails();
 
 	}
-
 
 }
 
@@ -106,12 +106,11 @@ function validateField(element) {
 
 }
 
-function createErrorMessage(element, error) {
+function createErrorMessage(element, error, div) {
 
 	//<element></element><span>there was an error</span>
 	var span = document.createElement("span");
 	var text = document.createTextNode(error);
-	var div = document.getElementById(element.id + "Div");
 
 	span.setAttribute("class", "error"); //error styling
 	span.setAttribute("id", element.id + "_error"); //id of element_error
