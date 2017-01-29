@@ -16,42 +16,37 @@ function validate() {
 	if (!validateField(name)) {
 
 		isValid = false;
+		createErrorMessage(name, "Name required.");
 
 	}
 
 	if (!validateField(email)) {
 
 		isValid = false;
+		createErrorMessage(,"Email required.");
 
 	}
 
-	if (!validateField(phoneAreaCode)) {
+	if (!validateField(phoneAreaCode) 
+		|| !validateField(phonePrefix) 
+		|| !validateField(phoneSuffix)) {
 
 		isValid = false;
-
-	}
-
-	if (!validateField(phonePrefix)) {
-
-		isValid = false;
-
-	}
-
-	if (validateField(phoneSuffix)) {
-
-		isValid = false;
+		createErrorMessage(phoneSuffix, "Full phone number required.");
 
 	}
 
 	if (validateField(address)) {
 
 		isValid = false;
+		createErrorMessage(address, "Address required.");
 
 	}
 
 	if (validateField(city)) {
 
 		isValid = false;
+		createErrorMessage(city, "City required.");
 
 	}
 
@@ -59,18 +54,21 @@ function validate() {
 	if (validateField(state)) {
 
 		isValid = false;
+		createErrorMessage(state, "State required.");
 
 	}
 
 	if (validateField(zip)) {
 
 		isValid = false;
+		createErrorMessage(zip, "Zip required.");
 
 	}
 
 	if (validateField(courses)) {
 
 		isValid = false;
+		createErrorMessage(courses, "At least one course required.");
 
 	}
 
@@ -88,6 +86,8 @@ function validate() {
 function outputDetails() {
 
 	//<div></div>
+	document.body.appendChild(document.createTextNode("NICE ONE!")); 
+	//TODO: get rid of this.
 
 }
 
@@ -108,7 +108,16 @@ function validateField(element) {
 
 function createErrorMessage(element, error) {
 
-	//<span>there was an error</span>
+	//<element></element><span>there was an error</span>
+	var span = document.createElement("span");
+	var text = document.createTextNode(error);
+	var div = document.getElementById(element.id + "Div");
+
+	span.setAttribute("class", "error"); //error styling
+	span.setAttribute("id", element.id + "_error"); //id of element_error
+
+	span.appendChild(text);
+	div.appendChild(span);
 
 }
 
