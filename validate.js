@@ -1,6 +1,6 @@
 function validate() {
 
-	//TODO: City error appears in wrong spot. Check boxes error not working correctly.
+	//TODO: Check boxes error not working correctly.
 
 	var isValid = true;
 	var name = document.getElementById("name");
@@ -94,15 +94,27 @@ function outputDetails() {
 // Is the field valid?
 function validateField(element) {
 
-	if (element.value.length > 0) {
+	alert(element.type);
+
+	if (element.nodeName == "checkbox") {
+
+		for (var box = 0; element.length; box++) {
+
+			if (element[box].checked) {
+
+				return true;
+
+			}
+
+		}
+
+	} else if (element.value.length > 0) {
 
 		return true; //yes
 
-	} else {
-
-		return false; //no
-
-	}
+	} 
+	
+	return false;
 
 }
 
