@@ -13,7 +13,9 @@ function validate() {
 	var state = document.getElementById("state");
 	var zip = document.getElementById("zip");
 	var gender = document.getElementById("gender");
-	var courses = document.getElementById("courses");
+	var courses = findCheckedBoxes([document.getElementById("course1"), 
+				   					document.getElementById("course2"), 
+				   					document.getElementById("course3")]);
 
 	if (!validateField(name)) {
 
@@ -94,17 +96,18 @@ function outputDetails() {
 // Is the field valid?
 function validateField(element) {
 
-	alert(element.type);
 
-	if (element.nodeName == "checkbox") {
+	if (element.constructor == Array) {
 
-		for (var box = 0; element.length; box++) {
+			alert(element.length);
 
-			if (element[box].checked) {
+		if (element.length > 0) {
 
-				return true;
+			return true;
 
-			}
+		} else {
+
+			return false;
 
 		}
 
@@ -112,10 +115,11 @@ function validateField(element) {
 
 		return true; //yes
 
-	} 
-	
-	return false;
+	} else {
 
+		return false;
+
+	}
 }
 
 function createErrorMessage(element, error, div) {
@@ -129,6 +133,24 @@ function createErrorMessage(element, error, div) {
 
 	span.appendChild(text);
 	div.appendChild(span);
+
+}
+
+function findCheckedBoxes(boxes) {
+
+	var checkedBoxes = [];
+
+	for (var box = 0; box < boxes.length; box++) {
+
+		if (boxes[box].checked) {
+
+			checkedBoxes.push(boxes[box]);
+
+		}
+
+	}
+
+	return checkedBoxes;
 
 }
 
