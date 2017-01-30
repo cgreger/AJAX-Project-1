@@ -69,6 +69,7 @@ function validate() {
 	if (!validateField(courses)) {
 
 		isValid = false;
+
 		createErrorMessage(courses, "At least one course required.", document.getElementById("coursesDiv"));
 
 	}
@@ -94,11 +95,11 @@ function outputDetails() {
 // Is the field valid?
 function validateField(element) {
 
-
-	if (element.constructor == Array) {
+	if (isCheckbox(element)) {
 
 		if (element.length > 0) {
 
+			removeErrorMessage(element);
 			return true; //valid
 
 		} else {
@@ -122,14 +123,23 @@ function validateField(element) {
 // Creates the error message if there is not one already present
 function createErrorMessage(element, error, div) {
 
-	if (!checkForErrorMessage(element)) {
+	if (!getErrorElement(element)) {
 
 		//<div><element></element><span>there was an error</span></div>
 		var span = document.createElement("span");
 		var text = document.createTextNode(error);
 
 		span.setAttribute("class", "error"); //error styling
-		span.setAttribute("id", element.id + "_error"); //id of element_error
+
+		if (isCheckbox(element)) {
+
+			span.setAttribute("id", "checkbox_error");
+
+		} else {
+
+			span.setAttribute("id", element.id + "_error"); //id of element_error
+
+		}
 
 		span.appendChild(text);
 		div.appendChild(span);
@@ -156,10 +166,27 @@ function findCheckedBoxes(boxes) {
 
 }
 
+// Returns true if the given element is an array of checkboxes
+function isCheckbox(element) {
+
+	if (element.constructor == Array) {
+
+		return true;
+
+	} else {
+
+		return false;
+
+	}
+
+}
+
 // If there is an error message to remove, the function will remove it.
 function removeErrorMessage(element) {
 
-	if (checkForErrorMessage(element)) {
+	var errorElement = getErrorElement(element);
+
+	if (errorElement) {
 
 		//<div><element></element><span>there was an error</span><div> //current
 		//<div><element></element> //desired
@@ -169,17 +196,18 @@ function removeErrorMessage(element) {
 
 }
 
-function checkForErrorMessage(element) {
+// Returns the errorElement if an error msg is present
+// Returns null if no error message is present
+function getErrorElement(element) {
 
-	var errorElement = document.getElementById(element.id + "_error");
+	if (isCheckbox(element)) {
 
-	if (!errorElement) {
-
-		return false; // No error msg present
+		return document.getElementById("checkbox_error");
 
 	} else {
 
-		return true; // Error msg present
+		return document.getElementById(element.id + "_error");
+
 	}
 
 }
