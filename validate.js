@@ -1,7 +1,5 @@
 function validate() {
 
-	//TODO: Check boxes error not working correctly.
-
 	var isValid = true;
 	var name = document.getElementById("name");
 	var email = document.getElementById("email");
@@ -99,11 +97,9 @@ function validateField(element) {
 
 	if (element.constructor == Array) {
 
-			alert(element.length);
-
 		if (element.length > 0) {
 
-			return true;
+			return true; //valid
 
 		} else {
 
@@ -113,7 +109,8 @@ function validateField(element) {
 
 	} else if (element.value.length > 0) {
 
-		return true; //yes
+		removeErrorMessage(element);
+		return true; //valid
 
 	} else {
 
@@ -122,17 +119,22 @@ function validateField(element) {
 	}
 }
 
+// Creates the error message if there is not one already present
 function createErrorMessage(element, error, div) {
 
-	//<element></element><span>there was an error</span>
-	var span = document.createElement("span");
-	var text = document.createTextNode(error);
+	if (!checkForErrorMessage(element)) {
 
-	span.setAttribute("class", "error"); //error styling
-	span.setAttribute("id", element.id + "_error"); //id of element_error
+		//<div><element></element><span>there was an error</span></div>
+		var span = document.createElement("span");
+		var text = document.createTextNode(error);
 
-	span.appendChild(text);
-	div.appendChild(span);
+		span.setAttribute("class", "error"); //error styling
+		span.setAttribute("id", element.id + "_error"); //id of element_error
+
+		span.appendChild(text);
+		div.appendChild(span);
+
+	}
 
 }
 
@@ -154,9 +156,31 @@ function findCheckedBoxes(boxes) {
 
 }
 
+// If there is an error message to remove, the function will remove it.
 function removeErrorMessage(element) {
 
+	if (checkForErrorMessage(element)) {
 
+		//<div><element></element><span>there was an error</span><div> //current
+		//<div><element></element> //desired
+		errorElement.parentNode.removeChild(errorElement);
+
+	}
+
+}
+
+function checkForErrorMessage(element) {
+
+	var errorElement = document.getElementById(element.id + "_error");
+
+	if (!errorElement) {
+
+		return false; // No error msg present
+
+	} else {
+
+		return true; // Error msg present
+	}
 
 }
 
