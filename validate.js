@@ -10,7 +10,7 @@ function validate() {
 	var city = document.getElementById("city");
 	var state = document.getElementById("state");
 	var zip = document.getElementById("zip");
-	var gender = document.getElementById("gender");
+	var genders = [document.getElementById("gender1"), document.getElementById("gender2")];
 	var courses = findCheckedBoxes([document.getElementById("course1"), 
 				   					document.getElementById("course2"), 
 				   					document.getElementById("course3")]);
@@ -78,18 +78,81 @@ function validate() {
 	// Output details if isValid flag still true
 	if (isValid) {
 
-		outputDetails();
-
+		outputDetails(name, 
+					  email, 
+					  phoneAreaCode,
+					  phonePrefix,
+					  phoneSuffix,
+					  address,
+					  city,
+					  state,
+					  zip,
+					  genders,
+					  courses);
 	}
 
 }
 
-function outputDetails() {
+function outputDetails(name, email, phoneAreaCode, phonePrefix, 
+					   phoneSuffix, address, city, state, zip, 
+					   genders, courses) {
 
-	//<div></div>
-	document.body.appendChild(document.createTextNode("NICE ONE!")); 
-	//TODO: get rid of this.
+	var formattedCourses = "";
 
+	for (var course = 0; course < courses.length; course++) {
+
+		if (course < courses.length - 1) {
+
+			formattedCourses += courses[course].value + ", ";
+
+		} else {
+
+			formattedCourses += courses[course].value;
+
+		}
+
+	}
+
+    var formattedPhoneNumber = "(" + phoneAreaCode.value 
+    						 + ") " + phonePrefix.value
+    						 + "-" + phoneSuffix.value;
+    var checkedGender;
+
+    if (genders[0].checked) {
+
+    	checkedGender = genders[0].value;
+
+    } else {
+
+    	checkedGender = genders[1].value;
+
+    }
+
+    var outputItems = ["Name: " + name.value,
+					   "Email: " + email.value,
+					   "Phone: " + formattedPhoneNumber,
+					   "Address: " + address.value,
+					   "City: " + city.value,
+					   "State: " + state.value,
+					   "Zip: " + zip.value,
+					   "Gender: " + checkedGender,
+					   "Previous Course(s): " + formattedCourses];
+
+	var outputDiv = document.createElement("div");
+	outputDiv.setAttribute("id", "outputDiv");
+	var h2 = document.createElement("h2");
+	h2.appendChild(document.createTextNode("---Entered Form Values---"));
+
+	outputDiv.appendChild(h2);
+
+	for (var item = 0; item < outputItems.length; item++) {
+
+		outputDiv.appendChild(document.createTextNode(outputItems[item]));
+		outputDiv.appendChild(document.createElement("br"));
+
+	}
+	
+	document.body.appendChild(outputDiv);
 }
 
 // Is the field valid?
